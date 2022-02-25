@@ -1,0 +1,31 @@
+.myBtn {
+    padding: 5px 15px;
+    margin: 5px;
+    color: #E53D00;
+    font-size: 14px;
+    background: transparent;
+    border: 1px solid #21A0A0;
+    cursor: pointer;
+}
+
+input+.myBtn {
+    margin-top: 10px;
+}
+
+.myBtn_white {
+    color: #F5F5F5;
+}
+
+.myBtn_orange {
+    color: #E4491C;
+}
+
+.myBtn_light_blue {
+    color: #0387B1;
+}
+
+.myBtn:hover {
+    color: #FFE900;
+    background-color: #E53D00;
+    border-color: #FCFFF7;
+}
