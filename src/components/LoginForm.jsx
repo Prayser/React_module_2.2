@@ -5,12 +5,10 @@ import { changeEmailAction } from '../store/formReducer';
 import MyButton from './UI/button/MyButton'
 import UserService from '../API/UserService';
 import MyInput from './UI/input/MyInput'
-import { useNavigate } from 'react-router-dom';
 import { loginUserAction } from '../store/userReducer';
 
 const LoginForm = () => {
     const dispath = useDispatch();
-    const navigate = useNavigate();
 
     const email = useSelector(state => state.form.email);
     const password = useSelector(state => state.form.password);
