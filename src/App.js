@@ -6,8 +6,8 @@ import Login from './pages/Login';
 import PersonalAccount from './pages/PersonalAccount';
 
 function App() {
-  const isAuth = useSelector(state => state.user.isAuth)
-  console.log(isAuth);
+  const isAuth = useSelector(state => state.login.isAuth)
+
   return (
     <BrowserRouter>
       <Routes>

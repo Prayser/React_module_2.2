@@ -1,5 +1,5 @@
 import axios from "axios";
-import { loginUserAction } from "../store/userReducer";
+import { getUserAction } from "../store/userReducer";
 
 export default class UserService {
     static async postUser(email, password) {
@@ -28,7 +28,7 @@ export default class UserService {
                     'Authorization': token,
                     'Content-Type': 'application/json'
                 }
-            }).then(response => dispath(loginUserAction(response.data)))
+            }).then(response => dispath(getUserAction(response.data)))
         }
 
     }

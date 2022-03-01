@@ -1,28 +1,29 @@
 
-const LOGIN_USER = 'LOGIN_USER';
-const LOGOUT_USER = 'LOGOUT_USER';
+const GET_USER = 'GET_USER';
+const DELETE_USER = 'DELETE_USER';
 
 // let action = { type: "", payload: '' }
 const defaultState = {
-    isAuth: false,
     user: {}
 }
 
 export const userReducer = (state = defaultState, action) => {
     switch (action.type) {
-        case LOGIN_USER:
-            return { ...state, isAuth: true, user: action.payload, }
-        case LOGOUT_USER:
-            return { ...state, isAuth: false, user: {}, }
+        case GET_USER:
+            localStorage.setItem('auth', 'true');
+            return { ...state, user: action.payload, }
+        case DELETE_USER:
+            localStorage.setItem('auth', 'false');
+            return { ...state, user: {}, }
         default:
             return state
     }
 }
 
-export function loginUserAction(payload) {
-    return { type: LOGIN_USER, payload }
+export function getUserAction(payload) {
+    return { type: GET_USER, payload }
 }
 
-export function logoutUserAction(payload) {
-    return { type: LOGOUT_USER, payload }
+export function deleteUserAction(payload) {
+    return { type: DELETE_USER, payload }
 }

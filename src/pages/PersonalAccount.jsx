@@ -1,38 +1,91 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import MyButton from '../components/UI/button/MyButton';
-import { logoutUserAction } from '../store/userReducer';
+import { logoutUserAction } from '../store/loginReducer';
 
 import styled from 'styled-components';
+import UserService from '../API/UserService';
+
+const UserDiv = styled.div`
+position:absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background: #415529; 
+background: #727b58; 
+background: rgba(255,255,255,.9);
+padding: 40px;
+box-sizing: border-box;
+box-shadow: 0 15px 25px rgba(0,0,0,.7);
+border-radius: 10px;
+`
+
+const Data = styled.div`
+display: flex;
+margin-bottom: 15px;
+`
+const Avatar = styled.img`
+object-fit: cover;
+object-position: 50% 50%;
+`
 
 const MyUL = styled.ul`
 padding: 0;
+margin: 0;
 text-align: center;
+display: flex;
+flex-direction: column;
+align-items: stretch;
+justify-content: space-between;
 `
-
 const MyLi = styled.li`
-color: white;
+color: black;
 list-style: none;
-font-size: 2rem;
+border-bottom: 1px solid #415529;
+padding-bottom: 10px;
+margin-left: 10px;
+font-size: 1rem;
+display: flex;
+justify-content: space-between;
+min-width: 250px;
+
 `
 
 const PersonalAccount = () => {
     const dispath = useDispatch();
+    const token = useSelector(state => state.login.token)
+
+    const [loading, setLoading] = useState(false);
     const userData = useSelector(state => state.user.user);
-    console.log(userData);
+
+    useEffect(() => {
+        setLoading(true);
+        dispath(UserService.getUserSync(token));
+        setLoading(false);
+    }, []);
 
     return (
-        <div>
-            <MyUL>
-                <MyLi>{userData.firstName} {userData.lastName}</MyLi>
-                <MyLi>{userData.username}</MyLi>
-                <MyLi>{userData.country}, {userData.city}</MyLi>
-                <MyLi>{userData.phone}</MyLi>
-                <MyLi>{userData.userRole}</MyLi>
-            </MyUL>
-            <MyButton onClick={() => { dispath(logoutUserAction(null)) }}>Log out</MyButton>
-        </div>
+
+        <UserDiv>
+            {loading
+                ? <h2>Идёт загрузка...</h2>
+                : <>
+                    <Data>
+                        <Avatar src={userData.avatar} />
+                        <MyUL>
+                            <MyLi><span>Full name:</span>   <span>{userData.firstName} {userData.lastName} </span ></MyLi>
+                            <MyLi><span>Email:</span>       <span>{userData.username}</span> </MyLi>
+                            <MyLi><span>Address:</span>     <span>{userData.country}, {userData.city}</span> </MyLi>
+                            <MyLi><span>Phone:</span>       <span>{userData.phone}</span> </MyLi>
+                            <MyLi><span>Role:</span>        <span>{userData.userRole}</span> </MyLi>
+                        </MyUL>
+                    </Data>
+                    <MyButton onClick={() => { dispath(logoutUserAction(null)) }}>Log out</MyButton>
+                </>
+            }
+        </UserDiv>
+
     );
 }
 

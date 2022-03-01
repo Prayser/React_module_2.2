@@ -1,10 +1,9 @@
 body {
-  text-align: center;
-  background-color: #046865;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: url(https://images.pexels.com/photos/1083515/pexels-photo-1083515.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+  background-size: cover;
 }
 
 #root {

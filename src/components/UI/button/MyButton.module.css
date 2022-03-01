@@ -1,10 +1,11 @@
 .myBtn {
-    padding: 5px 15px;
-    margin: 5px;
-    color: #E53D00;
-    font-size: 14px;
-    background: transparent;
-    border: 1px solid #21A0A0;
+    padding: 10px 20px;
+    color: #fff;
+    background: #53722a;
+    /* font-size: 14px; */
+    outline: none;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
 }
 
@@ -25,7 +26,7 @@ input+.myBtn {
 }
 
 .myBtn:hover {
-    color: #FFE900;
-    background-color: #E53D00;
-    border-color: #FCFFF7;
+    /* color: #FFE900; */
+    background: #415529;
+    /* filter: grayscale(50%); */
 }
