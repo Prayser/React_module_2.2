@@ -5,7 +5,7 @@ import MyButton from '../components/UI/button/MyButton';
 import { logoutUserAction } from '../store/loginReducer';
 
 import styled from 'styled-components';
-import UserService from '../API/UserService';
+import UserService from '../api/UserService';
 
 const UserDiv = styled.div`
 position:absolute;

@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Login from './pages/Login';
+import LoginForm from './pages/LoginForm';
 import PersonalAccount from './pages/PersonalAccount';
 
 function App() {
@@ -17,8 +17,8 @@ function App() {
             <Route path='*' element={<Navigate to='/user' />} />
           </>
           : <>
-            <Route path='/' element={<Login />} />
-            <Route path='/login' element={<Login />} />
+            <Route path='/' element={<LoginForm />} />
+            <Route path='/login' element={<LoginForm />} />
             <Route path='*' element={<Navigate to='/login' />} />
           </>
         }
