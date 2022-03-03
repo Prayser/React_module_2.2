@@ -56,13 +56,16 @@ const PersonalAccount = () => {
     const dispath = useDispatch();
     const token = useSelector(state => state.login.token)
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const userData = useSelector(state => state.user.user);
 
     useEffect(() => {
-        setLoading(true);
-        dispath(UserService.getUserSync(token));
-        setLoading(false);
+        (async () => {
+            setLoading(true);
+            await dispath(UserService.getUserSync(token));
+            setLoading(false);
+        })();
+
     }, [dispath, token]);
 
     return (
