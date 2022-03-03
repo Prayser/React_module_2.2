@@ -63,7 +63,7 @@ const PersonalAccount = () => {
         setLoading(true);
         dispath(UserService.getUserSync(token));
         setLoading(false);
-    }, []);
+    }, [dispath, token]);
 
     return (
 
