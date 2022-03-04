@@ -24,6 +24,6 @@ export function getUserAction(payload) {
     return { type: GET_USER, payload }
 }
 
-export function deleteUserAction(payload) {
-    return { type: DELETE_USER, payload }
+export function deleteUserAction() {
+    return { type: DELETE_USER }
 }

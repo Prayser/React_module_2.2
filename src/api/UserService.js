@@ -1,4 +1,5 @@
 import axios from "axios";
+import { offLoadingAction, onLoadingAction } from "../store/loadingReducer";
 import { getUserAction } from "../store/userReducer";
 
 export default class UserService {
@@ -23,12 +24,16 @@ export default class UserService {
 
     static getUserSync(token) {
         return function (dispath) {
+            dispath(onLoadingAction())
             axios.get('https://api.englishpatient.org/users/me', {
                 headers: {
                     'Authorization': token,
                     'Content-Type': 'application/json'
                 }
-            }).then(response => dispath(getUserAction(response.data)))
+            }).then(response => {
+                dispath(getUserAction(response.data))
+                dispath(offLoadingAction());
+            })
         }
 
     }

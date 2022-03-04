@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import MyButton from '../components/UI/button/MyButton';
@@ -6,6 +6,8 @@ import { logoutUserAction } from '../store/loginReducer';
 
 import styled from 'styled-components';
 import UserService from '../api/UserService';
+import { deleteUserAction } from '../store/userReducer';
+import { onLoadingAction } from '../store/loadingReducer';
 
 const UserDiv = styled.div`
 position:absolute;
@@ -55,21 +57,20 @@ min-width: 250px;
 const PersonalAccount = () => {
     const dispath = useDispatch();
     const token = useSelector(state => state.login.token)
+    const loading = useSelector(state => state.loading.loading)
 
-    const [loading, setLoading] = useState(true);
     const userData = useSelector(state => state.user.user);
-
     useEffect(() => {
-        (async () => {
-            setLoading(true);
-            await dispath(UserService.getUserSync(token));
-            setLoading(false);
-        })();
-
+        dispath(onLoadingAction());
+        dispath(UserService.getUserSync(token));
     }, [dispath, token]);
 
-    return (
+    const logout = () => {
+        dispath(deleteUserAction());
+        dispath(logoutUserAction());
+    }
 
+    return (
         <UserDiv>
             {loading
                 ? <h2>Идёт загрузка...</h2>
@@ -77,14 +78,14 @@ const PersonalAccount = () => {
                     <Data>
                         <Avatar src={userData.avatar} />
                         <MyUL>
-                            <MyLi><span>Full name:</span>   <span>{userData.firstName} {userData.lastName} </span ></MyLi>
+                            <MyLi><span>Full name:</span>   <span>{userData.firstName} {userData.lastName} </span></MyLi>
                             <MyLi><span>Email:</span>       <span>{userData.username}</span> </MyLi>
                             <MyLi><span>Address:</span>     <span>{userData.country}, {userData.city}</span> </MyLi>
                             <MyLi><span>Phone:</span>       <span>{userData.phone}</span> </MyLi>
                             <MyLi><span>Role:</span>        <span>{userData.userRole}</span> </MyLi>
                         </MyUL>
                     </Data>
-                    <MyButton onClick={() => { dispath(logoutUserAction(null)) }}>Log out</MyButton>
+                    <MyButton onClick={() => { logout() }}>Log out</MyButton>
                 </>
             }
         </UserDiv>

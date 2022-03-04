@@ -50,7 +50,9 @@ const LoginForm = () => {
         event.preventDefault();
         const response = await UserService.postUser(email, password);
         const token = response.data.token;
-        if (token) dispath(loginUserAction(token));
+        if (token) {
+            dispath(loginUserAction(token));
+        }
     }
 
     return (
