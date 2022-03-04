@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { changeEmailAction, changePasswordAction } from '../store/formReducer';
+import { changeEmailAction, changePasswordAction } from '../store/reducers/formReducer';
 import MyButton from '../components/UI/button/MyButton'
 import UserService from '../api/UserService';
 import MyInput from '../components/UI/input/MyInput'
-import { loginUserAction } from '../store/loginReducer';
+import { loginUserAction } from '../store/reducers/loginReducer';
 import styled from 'styled-components';
 
 

@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import MyButton from '../components/UI/button/MyButton';
-import { logoutUserAction } from '../store/loginReducer';
+import { logoutUserAction } from '../store/reducers/loginReducer';
 
 import styled from 'styled-components';
 import UserService from '../api/UserService';
-import { deleteUserAction } from '../store/userReducer';
-import { onLoadingAction } from '../store/loadingReducer';
+import { deleteUserAction } from '../store/reducers/userReducer';
+import { onLoadingAction } from '../store/reducers/loadingReducer';
 
 const UserDiv = styled.div`
 position:absolute;
