@@ -4,7 +4,7 @@ const OFF_LOADING = 'OFF_LOADING';
 
 // let action = { type: "", payload: '' }
 const defaultState = {
-    loading: true,
+    loading: false,
 }
 
 export const loadingReducer = (state = defaultState, action) => {

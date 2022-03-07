@@ -1,4 +1,4 @@
-import LoginForm from "../pages/LoginForm"
+import Login from "../pages/Login"
 import PersonalAccount from "../pages/PersonalAccount"
 
 
@@ -7,5 +7,5 @@ export const privateRoutes = [
 ]
 
 export const publicRoutes = [
-    { path: '/login', component: <LoginForm /> },
+    { path: '/login', component: <Login /> },
 ]

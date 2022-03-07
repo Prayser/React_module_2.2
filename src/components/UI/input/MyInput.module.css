@@ -42,3 +42,14 @@
     color: #415529;
     font-size: 13px;
 }
+
+
+.inputBox.wrong .myInput {
+    border-bottom: 1px solid red;
+}
+
+
+.inputBox.wrong .myInput:focus~label,
+.inputBox.wrong .myInput:valid~label {
+    color: red;
+}

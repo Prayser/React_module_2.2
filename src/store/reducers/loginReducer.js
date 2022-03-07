@@ -12,14 +12,13 @@ export const loginReducer = (state = defaultState, action) => {
     switch (action.type) {
 
         case LOGIN_USER:
-            // localStorage.setItem('auth', 'true');
             localStorage.setItem('token', `${action.payload}`);
             return { ...state, isAuth: true, token: action.payload, }
 
         case LOGOUT_USER:
-            // localStorage.setItem('auth', 'false');
             localStorage.setItem('token', NaN);
             return { ...state, isAuth: false, token: NaN, }
+
 
         default:
             return state
