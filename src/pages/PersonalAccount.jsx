@@ -7,7 +7,7 @@ import { logoutUserAction } from '../store/reducers/loginReducer';
 import styled from 'styled-components';
 import UserService from '../api/UserService';
 import { deleteUserAction } from '../store/reducers/userReducer';
-import { onLoadingAction } from '../store/reducers/loadingReducer';
+// import { onLoadingAction } from '../store/reducers/loadingReducer';
 
 const UserDiv = styled.div`
 position:absolute;
@@ -61,7 +61,6 @@ const PersonalAccount = () => {
 
     const userData = useSelector(state => state.user.user);
     useEffect(() => {
-        dispath(onLoadingAction());
         dispath(UserService.getUserSync(token));
     }, [dispath, token]);
 
