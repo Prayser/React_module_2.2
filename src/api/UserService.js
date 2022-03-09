@@ -1,8 +1,6 @@
 import axios from "axios";
-import { offLoadingAction, onLoadingAction } from "../store/reducers/loadingReducer";
-import { getUserAction } from "../store/reducers/userReducer";
 
-const baseURL = 'https://api.englishpatient.org';
+export const baseURL = 'https://api.englishpatient.org';
 
 export default class UserService {
     static async postUser(email, password) {
@@ -24,19 +22,4 @@ export default class UserService {
 
     }
 
-    static getUserSync(token) {
-        return function (dispath) {
-            dispath(onLoadingAction())
-            axios.get(baseURL + '/users/me', {
-                headers: {
-                    'Authorization': token,
-                    'Content-Type': 'application/json'
-                }
-            }).then(response => {
-                dispath(getUserAction(response.data))
-                dispath(offLoadingAction());
-            })
-        }
-
-    }
 }

@@ -1,6 +1,4 @@
-
-const LOGIN_USER = 'LOGIN_USER';
-const LOGOUT_USER = 'LOGOUT_USER';
+import * as types from '../types/ActionTypes'
 
 // let action = { type: "", payload: '' }
 const defaultState = {
@@ -11,24 +9,15 @@ const defaultState = {
 export const loginReducer = (state = defaultState, action) => {
     switch (action.type) {
 
-        case LOGIN_USER:
+        case types.LOGIN_USER:
             localStorage.setItem('token', `${action.payload}`);
             return { ...state, isAuth: true, token: action.payload, }
 
-        case LOGOUT_USER:
+        case types.LOGOUT_USER:
             localStorage.setItem('token', NaN);
             return { ...state, isAuth: false, token: NaN, }
-
 
         default:
             return state
     }
-}
-
-export function loginUserAction(payload) {
-    return { type: LOGIN_USER, payload }
-}
-
-export function logoutUserAction() {
-    return { type: LOGOUT_USER }
 }

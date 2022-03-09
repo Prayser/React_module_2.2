@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { changeEmailAction, changePasswordAction, correctLoginAction, incorrectLoginAction } from '../../store/reducers/formReducer';
-import MyButton from '../UI/button/MyButton'
+import styled from 'styled-components';
 import UserService from '../../api/UserService';
 import MyInput from '../UI/input/MyInput'
-import { loginUserAction } from '../../store/reducers/loginReducer';
-import styled from 'styled-components';
+import MyButton from '../UI/button/MyButton'
 import s from './LoginForm.module.css'
-import { offLoadingAction, onLoadingAction } from '../../store/reducers/loadingReducer';
+import { loginUserAction } from '../../store/actions/loginActions';
+import { offLoadingAction, onLoadingAction } from '../../store/actions/loadingActions';
+import { changeEmailAction, changePasswordAction, correctLoginAction, incorrectLoginAction } from '../../store/actions/formActions';
 
 
 const FormBox = styled.div`

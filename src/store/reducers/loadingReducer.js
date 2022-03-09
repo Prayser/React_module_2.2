@@ -1,6 +1,4 @@
-
-const ON_LOADING = 'ON_LOADING';
-const OFF_LOADING = 'OFF_LOADING';
+import * as types from '../types/ActionTypes'
 
 // let action = { type: "", payload: '' }
 const defaultState = {
@@ -9,19 +7,11 @@ const defaultState = {
 
 export const loadingReducer = (state = defaultState, action) => {
     switch (action.type) {
-        case ON_LOADING:
+        case types.ON_LOADING:
             return { loading: true, }
-        case OFF_LOADING:
+        case types.OFF_LOADING:
             return { loading: false, }
         default:
             return state
     }
-}
-
-export function onLoadingAction() {
-    return { type: ON_LOADING }
-}
-
-export function offLoadingAction() {
-    return { type: OFF_LOADING }
 }

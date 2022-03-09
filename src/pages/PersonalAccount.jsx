@@ -1,13 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import MyButton from '../components/UI/button/MyButton';
-import { logoutUserAction } from '../store/reducers/loginReducer';
-
 import styled from 'styled-components';
-import UserService from '../api/UserService';
-import { deleteUserAction } from '../store/reducers/userReducer';
-// import { onLoadingAction } from '../store/reducers/loadingReducer';
+import MyButton from '../components/UI/button/MyButton';
+import { logoutUserAction } from '../store/actions/loginActions';
+import { getUserSync, deleteUserAction } from '../store/actions/userActions';
 
 const UserDiv = styled.div`
 position:absolute;
@@ -61,7 +58,7 @@ const PersonalAccount = () => {
 
     const userData = useSelector(state => state.user.user);
     useEffect(() => {
-        dispath(UserService.getUserSync(token));
+        dispath(getUserSync(token));
     }, [dispath, token]);
 
     const logout = () => {
