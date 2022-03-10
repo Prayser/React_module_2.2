@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import MyButton from '../components/UI/button/MyButton';
-import { getUserSync, deleteUserAction, logoutUserAction } from '../store/actions/userActions';
+import { getUserSync, logoutUserAction } from '../store/actions/userActions';
 
 const UserDiv = styled.div`
 position:absolute;
