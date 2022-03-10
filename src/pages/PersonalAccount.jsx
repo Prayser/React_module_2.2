@@ -3,8 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import MyButton from '../components/UI/button/MyButton';
-import { logoutUserAction } from '../store/actions/loginActions';
-import { getUserSync, deleteUserAction } from '../store/actions/userActions';
+import { getUserSync, deleteUserAction, logoutUserAction } from '../store/actions/userActions';
 
 const UserDiv = styled.div`
 position:absolute;
@@ -53,16 +52,15 @@ min-width: 250px;
 
 const PersonalAccount = () => {
     const dispath = useDispatch();
-    const token = useSelector(state => state.login.token)
-    const loading = useSelector(state => state.loading.loading)
 
     const userData = useSelector(state => state.user.user);
+    const loading = useSelector(state => state.loading.loading)
+
     useEffect(() => {
-        dispath(getUserSync(token));
-    }, [dispath, token]);
+        dispath(getUserSync());
+    }, [dispath]);
 
     const logout = () => {
-        dispath(deleteUserAction());
         dispath(logoutUserAction());
     }
 

@@ -6,7 +6,7 @@ import UserService from '../../api/UserService';
 import MyInput from '../UI/input/MyInput'
 import MyButton from '../UI/button/MyButton'
 import s from './LoginForm.module.css'
-import { loginUserAction } from '../../store/actions/loginActions';
+import { loginUserAction } from '../../store/actions/userActions';
 import { offLoadingAction, onLoadingAction } from '../../store/actions/loadingActions';
 import { changeEmailAction, changePasswordAction, correctLoginAction, incorrectLoginAction } from '../../store/actions/formActions';
 
@@ -53,10 +53,6 @@ const LoginForm = () => {
     const [labelEmail, setLabelEmail] = useState('Email');
     const [valid, setValid] = useState('');
 
-    const emailRegExp = new RegExp(
-        "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?[.]{1}(?:.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$"
-    );
-
     const changeEmail = (event) => {
         setLabelEmail('Email');
         setValid('');
@@ -69,37 +65,36 @@ const LoginForm = () => {
         dispath(correctLoginAction());
     }
 
+    const emailRegExp = new RegExp(
+        "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?[.]{1}(?:.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$"
+    );
+
     const login = async () => {
         dispath(onLoadingAction());
         dispath(correctLoginAction());
 
-        const response = await UserService.postUser(email, password);
+        if (!emailRegExp.test(email)) {
+            setLabelEmail('Некорректный email');
+            setValid('wrong');
+            dispath(offLoadingAction());
+            return
+        }
 
-        console.log(response);
-        console.log(response.data);
+        const response = await UserService.postUser(email, password);
 
         if (response.data.error) {
             dispath(incorrectLoginAction())
             dispath(offLoadingAction());
-            return;
+            return
         }
         const token = response.data.token;
         if (token) {
-            console.log(token);
             dispath(loginUserAction(token));
         }
         dispath(offLoadingAction());
     }
 
 
-    const validEmailTest = () => {
-        if (emailRegExp.test(email)) {
-            login();
-        } else {
-            setLabelEmail('Некорректный email');
-            setValid('wrong');
-        }
-    }
 
 
     return (
@@ -124,7 +119,7 @@ const LoginForm = () => {
                     : <MyButton
                         onClick={(event) => {
                             event.preventDefault();
-                            validEmailTest();
+                            login();
                         }}> Войти </MyButton>
 
                 }

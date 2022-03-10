@@ -5,7 +5,7 @@ import { privateRoutes, publicRoutes } from '../router/routes';
 
 const AppRouter = () => {
 
-    const isAuth = useSelector(state => state.login.isAuth)
+    const isAuth = useSelector(state => state.user.isAuth)
 
     return (
         isAuth
